@@ -8,18 +8,14 @@ const string hangmanWithArms[5] = {" O","\n-|-", "", "\n /\\"};
 char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 struct Tester;
 
-struct Node{
-    Node *leaf[sizeof(alphabet)];
-    bool endOfWord;
-};
-
-struct Hangman{
-    friend class Tester;
+class Hangman{
+    Hangman *leaf[sizeof(alphabet)];
     Hangman();
     ~Hangman();
     void insert();
     bool search();
     
     // the actual word
-    Node *word;
+    Hangman *root;
+    bool endOfWord;
 };
