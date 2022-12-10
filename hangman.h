@@ -5,17 +5,16 @@ using namespace std;
 const string hangmanWithoutArms[5] = {"O","\n|", "/", "\n\\", "-"};
 const string hangmanWithArms[5] = {" O","\n-|-", "", "\n /\\"};
 // array of alphabet
-char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+const char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+#define SIZE 128
 struct Tester;
 
-class Hangman{
-    Hangman *leaf[sizeof(alphabet)];
+struct Hangman{
+    bool endOfWord;
+    Hangman *leaf[SIZE];
     Hangman();
     ~Hangman();
-    void insert();
-    bool search();
-    
-    // the actual word
-    Hangman *root;
-    bool endOfWord;
+    void insert(string theWord);
+    bool search(string wordSearch);
+
 };
