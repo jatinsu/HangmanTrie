@@ -10,11 +10,12 @@ const char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','
 struct Tester;
 
 struct Hangman{
-    bool endOfWord;
-    Hangman *leaf[SIZE];
     Hangman();
     ~Hangman();
-    void insert(string theWord);
+    void insert(string key);
+    void insertArray(string theWord);
     bool search(string wordSearch);
-
+    bool endOfWord;
+    Hangman *leaf[SIZE];
+    Hangman *root = nullptr;
 };

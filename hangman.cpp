@@ -8,11 +8,28 @@ Hangman::Hangman(){
 }
 
 Hangman::~Hangman(){
-    delete[] this;
+    Hangman *temp = this;
+    for(int i = 0; i < SIZE; i++){
+        delete temp->leaf[i];
+    }
 }
 
+void Hangman::insert(string key){
+    string charToString;
+    string keys[5] = {};
 
-void Hangman::insert(string theWord){
+    for(int i = 0;  i < (int) key.length(); i++){
+        charToString = key[i];
+        keys[i] = charToString;
+    }
+    int n = sizeof(keys)/sizeof(keys[0]);
+
+    //Construct trie
+    for (int i = 0; i < n; i++)
+        insertArray(keys[i]);
+}
+
+void Hangman::insertArray(string theWord){
     Hangman *temp = this;
     for(int i = 0; i < (int) theWord.length(); i++){
         unsigned char word = theWord[i];

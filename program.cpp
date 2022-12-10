@@ -1,22 +1,25 @@
 #include "hangman.h"
 
 int main(){
-    cout << "hi";
     Hangman* hangman = new Hangman();
-    string charToString;
-    string key = "Hello";
-    string keys[5] = {};
-
-    for(int i = 0;  i < (int) key.length(); i++){
-        charToString = key[i];
-        keys[i] = charToString;
+    string key;
+    string letterToGuess;
+    cout << "\nWelcome to Hangman!\n";
+    cout << "Enter the word you would like to guess: ";
+    getline(cin, key);
+    hangman->insert(key);
+    cout << "Guess a letter! ";
+    getline(cin, letterToGuess);
+    while(letterToGuess.length() > 1){
+        cout << "Please only enter one letter!";
+        getline(cin, letterToGuess);
     }
-    int n = sizeof(keys)/sizeof(keys[0]);
-
-    // Construct trie
-    for (int i = 0; i < n; i++)
-        hangman->insert(keys[i]);
-    
+    if(hangman->search(letterToGuess)){
+        cout << "Letter " << letterToGuess << " found!\n";
+    }
     cout << hangman->search("H") << endl;
-
+    cout << hangman->search("e") << endl;
+    cout << hangman->search("l") << endl;
+    cout << hangman->search("o") << endl;
+    delete hangman;
 }
