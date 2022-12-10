@@ -1,4 +1,4 @@
-CXX = g++
+CXX = g++-12
 CXXFLAGS = -Wall -g
 
 # mytest: hangman.o mytest.cpp
