@@ -72,7 +72,10 @@ int Hangman::checkMultiples(string word){
     set<string> keys;
     for(int i = 0;  i < (int) word.length(); i++){
         charToString = word[i];
-        keys.insert(charToString);
+        // ignore if there is a space in the word
+        if(charToString != " "){
+            keys.insert(charToString);
+        }
     }
     return keys.size();
 }
@@ -118,8 +121,7 @@ void Hangman::program(){
         key = loadWords();
     }else{
         cout << "Enter the word you would like to guess for yourself: ";
-        cin >> key;
-        cin.ignore();
+        getline(cin, key);
     }
     // insertion
     hangman->insert(key);
@@ -129,6 +131,9 @@ void Hangman::program(){
 
     for(int i = 0; i < (int) key.length(); i++){
         emptyGraph[i] = "_";
+        if(key[i] == ' '){
+            emptyGraph[i] = ' ';
+        }
         letterArray[i] = key[i];
     }
 
@@ -193,7 +198,7 @@ void Hangman::program(){
         }
     }
 
-    cout << "The word was " << key << endl;
+    cout << "The word was " << "\""<< key << "\""<< endl;
     delete hangman;
     cout << "Thank you for playing!\n";
 }
