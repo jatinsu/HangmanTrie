@@ -129,7 +129,7 @@ void Hangman::program(){
         letterArray[i] = key[i];
     }
 
-    while(win != (int) key.length()){
+    while(win != hangman->checkMultiples(key)){
         cout << "Letters that you have guess that are right: ";
         for(int i = 0; i < (int) key.length(); i++){
             cout << emptyGraph[i];
