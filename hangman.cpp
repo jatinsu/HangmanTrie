@@ -28,8 +28,10 @@ bool Hangman::insert(string key){
         charToString = key[i];
         keys[i] = charToString;
     }
-    int n = sizeof(keys)/sizeof(keys[0]);
-    for (int i = 0; i < n; i++)
+
+    // I have no idea why sizeof(keys[0]) is needed, but seems to segfault without it
+    int size = sizeof(keys)/sizeof(keys[0]);
+    for (int i = 0; i < size; i++)
         insertArray(keys[i]);
     return true;
 }
@@ -119,8 +121,9 @@ void Hangman::program(){
         cin >> key;
         cin.ignore();
     }
+    // insertion
     hangman->insert(key);
-    
+
     string letterArray[(int) key.length()];    
     string emptyGraph[(int) key.length()];
 
@@ -134,15 +137,16 @@ void Hangman::program(){
         for(int i = 0; i < (int) key.length(); i++){
             cout << emptyGraph[i];
         }
+
         cout << endl;
         cout << "Letters that you have guessed that are wrong: ";
         for(int i = 0; i < (int) key.length(); i++){
             cout << wrongLetterArray[i];
         }
+
         cout << endl;
         cout << "Guess a letter or press 2 to guess the word! ";
         getline(cin, letterToGuess);
-
         while(letterToGuess.length() > 1){
             cout << "Please only enter one letter! \n";
             cout << "Guess a letter or press 2 to guess the word! ";
