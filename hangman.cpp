@@ -38,15 +38,6 @@ bool Hangman::insert(string key){
 // actual insertion
 void Hangman::insertArray(string theWord){
     Hangman *temp = this;
-    // int index = 0;
-    // while(index != (int) theWord.length()){
-    //     unsigned char word = theWord[index];
-    //     if(temp->leaf[word] == nullptr){
-    //         temp->leaf[word] = new Hangman();
-    //     }
-    //     temp = temp->leaf[word];
-    //     index++;
-    // }
     for(int i = 0; i < (int) theWord.length(); i++){
         // without unsigned char, tends to give warnings
         unsigned char word = theWord[i];
@@ -61,15 +52,6 @@ void Hangman::insertArray(string theWord){
 // search the tree for the letter
 bool Hangman::search(string wordSearch){
     Hangman *temp = this;
-    // int index = 0;
-    // while(index != (int) wordSearch.length()){
-    //     unsigned char word = wordSearch[index];
-    //     temp = temp->leaf[word];
-    //     if(temp == nullptr){
-    //         return false;
-    //     }
-    //     index++;
-    // }
     for(int i = 0; i < (int) wordSearch.length(); i++){
         // without unsigned char, tends to give warnings
         unsigned char word = wordSearch[i];
