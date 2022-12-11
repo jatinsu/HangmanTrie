@@ -1,14 +1,14 @@
 #include "hangman.h"
 
 Hangman::Hangman(){
-        this->endOfWord = false;
-        for(int i = 0; i < SIZE; i++){
-            this->leaf[i] = nullptr;
-        }
+    root->endOfWord = false;
+    for(int i = 0; i < SIZE; i++){
+        root->leaf[i] = nullptr;
+    }
 }
 
 Hangman::~Hangman(){
-    Hangman *temp = this;
+    Node *temp = root;
     for(int i = 0; i < SIZE; i++){
         delete temp->leaf[i];
     }
@@ -39,12 +39,12 @@ bool Hangman::insert(string key){
 
 // actual insertion
 void Hangman::insertArray(string theWord){
-    Hangman *temp = this;
+    Node *temp = root;
     for(int i = 0; i < (int) theWord.length(); i++){
         // without unsigned char, tends to give warnings
         unsigned char word = theWord[i];
         if(temp->leaf[word] == nullptr){
-            temp->leaf[word] = new Hangman();
+            temp->leaf[word] = new Node();
         }
         temp = temp->leaf[word];
     }
@@ -53,7 +53,7 @@ void Hangman::insertArray(string theWord){
 
 // search the tree for the letter
 bool Hangman::search(string wordSearch){
-    Hangman *temp = this;
+    Node *temp = root;
     for(int i = 0; i < (int) wordSearch.length(); i++){
         // without unsigned char, tends to give warnings
         unsigned char word = wordSearch[i];

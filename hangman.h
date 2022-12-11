@@ -10,6 +10,11 @@ const char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','
 struct Tester;
 const int WORD_SIZE = 2315;
 
+struct Node{
+    bool endOfWord;
+    Node *leaf[SIZE];
+};
+
 struct Hangman{
     friend struct Tester;
     Hangman();
@@ -30,6 +35,5 @@ struct Hangman{
     string loadWords();
     void program();
     int checkMultiples(string word);
-    bool endOfWord;
-    Hangman *leaf[SIZE];
+    Node *root;
 };
