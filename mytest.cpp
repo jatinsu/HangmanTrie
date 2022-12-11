@@ -5,6 +5,7 @@ struct Tester{
     void testSearch();
     void testInsertEdge();
     void testSearchEdge();
+    void testForMultiple();
 };
 
 int main(){
@@ -13,6 +14,7 @@ int main(){
     tester.testSearch();
     tester.testInsertEdge();
     tester.testSearchEdge();
+    tester.testForMultiple();
 }
 
 void Tester::testInsert(){
@@ -57,3 +59,13 @@ void Tester::testSearchEdge(){
     delete hangman;
 }
 
+void Tester::testForMultiple(){
+    cout << "5. Testing testForMultiple\n\n";
+    Hangman* hangman = new Hangman();
+    // should have a size of 1
+    if(hangman->checkMultiples("aaaaa") == 1)
+        cout << "testForMultiple passed!\n\n";
+    else
+        cout << "testForMultiple failed!\n\n";
+    delete hangman;
+}

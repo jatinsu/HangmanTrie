@@ -20,8 +20,9 @@ bool Hangman::insert(string key){
     if(key == ""){
         return false;
     }
+    int length = (int) key.length();
     string charToString;
-    string keys[5] = {};
+    string keys[length] = {};
     for(int i = 0;  i < (int) key.length(); i++){
         charToString = key[i];
         keys[i] = charToString;
@@ -80,6 +81,19 @@ bool Hangman::search(string wordSearch){
     return temp->endOfWord;
 }
 
+// check for multiples of the same letter in the word using sets
+int Hangman::checkMultiples(string word){
+    string charToString;
+    set<string> keys;
+    for(int i = 0;  i < (int) word.length(); i++){
+        charToString = word[i];
+        keys.insert(charToString);
+    }
+    return keys.size();
+}
+
+
+
 string Hangman::loadWords(){
     string myArray[WORD_SIZE];
     string word;
@@ -128,7 +142,6 @@ void Hangman::program(){
         letterArray[i] = key[i];
     }
     string wrongLetterArray[26];
-
     while(win != (int) key.length()){
         cout << "Letters that you have guess that are right: ";
         for(int i = 0; i < (int) key.length(); i++){
@@ -171,9 +184,9 @@ void Hangman::program(){
             hangman->printHangMan(loss);
             wrongLetterArray[loss] = letterToGuess;
             loss++;
-            cout << "That's the wrong letter!\nYou have " << 5 - loss << " tries left\n";
+            cout << "That's the wrong letter!\nYou have " << 5 - loss << " tries left\n\n";
         }
-        if(win == (int) key.length()){
+        if(win == hangman->checkMultiples(key)){
             cout << "You guessed correctly!\n";
             break;
         }

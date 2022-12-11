@@ -2,6 +2,7 @@
 #include <random>
 #include <fstream>
 #include <ctime>
+#include <set>
 using namespace std;
 // array of alphabet
 const char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
@@ -26,9 +27,10 @@ struct Hangman{
     bool insert(string key);
     void insertArray(string theWord);
     bool search(string wordSearch);
-    bool endOfWord;
     string loadWords();
     void program();
+    int checkMultiples(string word);
+    bool endOfWord;
     Hangman *leaf[SIZE];
     Hangman *root = nullptr;
 };
