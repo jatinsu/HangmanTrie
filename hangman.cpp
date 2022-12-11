@@ -124,6 +124,9 @@ void Hangman::program(){
         getline(cin, key);
     }
     // insertion
+    for(int i = 0; i < (int) key.length(); i++){
+        key[i] = tolower(key[i]);
+    }
     hangman->insert(key);
 
     string letterArray[(int) key.length()];    
@@ -152,10 +155,18 @@ void Hangman::program(){
         cout << endl;
         cout << "Guess a letter or press 2 to guess the word! ";
         getline(cin, letterToGuess);
+        for(int i = 0; i < (int) letterToGuess.length(); i++){
+            letterToGuess[i] = tolower(letterToGuess[i]);
+        }
+
+
         while(letterToGuess.length() > 1){
             cout << "Please only enter one letter! \n";
             cout << "Guess a letter or press 2 to guess the word! ";
             getline(cin, letterToGuess);
+            for(int i = 0; i < (int) letterToGuess.length(); i++){
+                letterToGuess[i] = tolower(letterToGuess[i]);
+            }
         }
 
         if(letterToGuess == "2"){
