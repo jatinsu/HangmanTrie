@@ -1,4 +1,4 @@
-CXX = g++-12
+CXX = g++
 CXXFLAGS = -Wall -g
 
 program: hangman.o program.cpp

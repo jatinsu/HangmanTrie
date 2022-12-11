@@ -11,7 +11,7 @@ struct Tester;
 const int WORD_SIZE = 2315;
 
 struct Hangman{
-    friend class Tester;
+    friend struct Tester;
     Hangman();
     ~Hangman();
     void printHangMan(int tries){
@@ -32,5 +32,4 @@ struct Hangman{
     int checkMultiples(string word);
     bool endOfWord;
     Hangman *leaf[SIZE];
-    Hangman *root = nullptr;
 };

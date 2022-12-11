@@ -20,9 +20,10 @@ bool Hangman::insert(string key){
     if(key == ""){
         return false;
     }
-    int length = (int) key.length();
+    int length = 0;
+    length = (int) key.length();
     string charToString;
-    string keys[length] = {};
+    string keys[length];
     for(int i = 0;  i < (int) key.length(); i++){
         charToString = key[i];
         keys[i] = charToString;
