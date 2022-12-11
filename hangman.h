@@ -10,6 +10,7 @@ struct Tester;
 const int WORD_SIZE = 2315;
 
 struct Hangman{
+    friend class Tester;
     Hangman();
     ~Hangman();
     void printHangMan(int tries){
@@ -22,7 +23,7 @@ struct Hangman{
         cout<<"  |"<<endl; 
         cout<<"__|__"<<endl;
     }
-    void insert(string key);
+    bool insert(string key);
     void insertArray(string theWord);
     bool search(string wordSearch);
     bool endOfWord;

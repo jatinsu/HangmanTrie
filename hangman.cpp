@@ -16,10 +16,12 @@ Hangman::~Hangman(){
 
 
 // insert whole words as seperate nodes in the tree
-void Hangman::insert(string key){
+bool Hangman::insert(string key){
+    if(key == ""){
+        return false;
+    }
     string charToString;
     string keys[5] = {};
-
     for(int i = 0;  i < (int) key.length(); i++){
         charToString = key[i];
         keys[i] = charToString;
@@ -27,6 +29,7 @@ void Hangman::insert(string key){
     int n = sizeof(keys)/sizeof(keys[0]);
     for (int i = 0; i < n; i++)
         insertArray(keys[i]);
+    return true;
 }
 
 
@@ -165,10 +168,10 @@ void Hangman::program(){
             cout << "Letter " << letterToGuess << " found!\n";
         }
         if(hangman->search(letterToGuess) == false && letterToGuess != "2"){
-            cout << "That's the wrong letter!\n";
             hangman->printHangMan(loss);
             wrongLetterArray[loss] = letterToGuess;
             loss++;
+            cout << "That's the wrong letter!\nYou have " << 5 - loss << " tries left\n";
         }
         if(win == (int) key.length()){
             cout << "You guessed correctly!\n";
