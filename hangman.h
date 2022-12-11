@@ -26,6 +26,8 @@ struct Hangman{
     void insertArray(string theWord);
     bool search(string wordSearch);
     bool endOfWord;
+    string loadWords();
+    void program();
     Hangman *leaf[SIZE];
     Hangman *root = nullptr;
 };
