@@ -1,4 +1,4 @@
-# How to compile/run the program#
+# How to compile/run the program #
 run `make program` to compile the actual program, then run `./program` to run it
 
 # How to compile/run the test file #
