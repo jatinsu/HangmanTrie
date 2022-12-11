@@ -1,8 +1,8 @@
 CXX = g++-12
 CXXFLAGS = -Wall -g
 
-# mytest: hangman.o mytest.cpp
-# 	$(CXX) $(CXXFLAGS) hangman.o mytest.cpp -o mytest
+mytest: hangman.o mytest.cpp
+	$(CXX) $(CXXFLAGS) hangman.o mytest.cpp -o mytest
 program: hangman.o program.cpp
 	$(CXX) $(CXXFLAGS) hangman.o program.cpp -o program
 hangman.o: hangman.cpp
