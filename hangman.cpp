@@ -106,6 +106,8 @@ void Hangman::program(){
     string key, choice, letterToGuess, wordGuess;
     int win = 0;
     unsigned int loss = 0;
+    string wrongLetterArray[26];
+
     cout << "\nWelcome to Hangman!\n";
     cout << "Would you like the computer to randomly pick a word for you to guess (y/n)? ";
     cin >> choice;
@@ -118,13 +120,15 @@ void Hangman::program(){
         cin.ignore();
     }
     hangman->insert(key);
+    
     string letterArray[(int) key.length()];    
     string emptyGraph[(int) key.length()];
+
     for(int i = 0; i < (int) key.length(); i++){
         emptyGraph[i] = "_";
         letterArray[i] = key[i];
     }
-    string wrongLetterArray[26];
+
     while(win != (int) key.length()){
         cout << "Letters that you have guess that are right: ";
         for(int i = 0; i < (int) key.length(); i++){
@@ -144,6 +148,7 @@ void Hangman::program(){
             cout << "Guess a letter or press 2 to guess the word! ";
             getline(cin, letterToGuess);
         }
+
         if(letterToGuess == "2"){
             cout << "What do you think the word is? ";
             getline(cin, wordGuess);
@@ -154,6 +159,7 @@ void Hangman::program(){
                 cout << "That's not right! \n";
             }
         }
+
         if(hangman->search(letterToGuess)){
             for(int i = 0; i < (int) key.length(); i++){
                 if(letterArray[i] == letterToGuess){
@@ -163,23 +169,27 @@ void Hangman::program(){
             win++;
             cout << "Letter " << letterToGuess << " found!\n";
         }
+
         if(hangman->search(letterToGuess) == false && letterToGuess != "2"){
             hangman->printHangMan(loss);
             wrongLetterArray[loss] = letterToGuess;
             loss++;
             cout << "That's the wrong letter!\nYou have " << 5 - loss << " tries left\n\n";
         }
+
         if(win == hangman->checkMultiples(key)){
             cout << "You guessed correctly!\n";
             break;
         }
+
         if(loss == 5){
             hangman->printHangMan(5);
             cout << "You ran out of guesses!\n";
             break;
         }
     }
+
     cout << "The word was " << key << endl;
     delete hangman;
-    cout << "Thank you for playing!";
+    cout << "Thank you for playing!\n";
 }
