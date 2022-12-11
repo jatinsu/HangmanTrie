@@ -23,8 +23,6 @@ void Hangman::insert(string key){
         keys[i] = charToString;
     }
     int n = sizeof(keys)/sizeof(keys[0]);
-
-    //Construct trie
     for (int i = 0; i < n; i++)
         insertArray(keys[i]);
 }

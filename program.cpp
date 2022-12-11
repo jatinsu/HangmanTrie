@@ -30,8 +30,9 @@ string loadWords(){
 int main(){
     Hangman* hangman = new Hangman();
     string key, choice, letterToGuess, wordGuess;
+    bool winBool = true;
     int win = 0;
-    int loss = 0;
+    unsigned int loss = 0;
     cout << "\nWelcome to Hangman!\n";
     cout << "Would you like the computer to randomly pick a word for you to guess (y/n)? ";
     cin >> choice;
@@ -45,11 +46,16 @@ int main(){
     }
     hangman->insert(key);
     string letterArray[(int) key.length()];
+    string emptyGraph[(int) key.length()];
+    for(int i = 0; i < (int) key.length(); i++){
+        emptyGraph[i] = "_";
+        letterArray[i] = key[i];
+    }
     string wrongLetterArray[26];
     while(win != (int) key.length()){
         cout << "Letters that you have guess that are right: ";
         for(int i = 0; i < (int) key.length(); i++){
-            cout << letterArray[i];
+            cout << emptyGraph[i];
         }
         cout << endl;
         cout << "Letters that you have guessed that are wrong: ";
@@ -59,6 +65,12 @@ int main(){
         cout << endl;
         cout << "Guess a letter or press 2 to guess the word! ";
         getline(cin, letterToGuess);
+
+        while(letterToGuess.length() > 1){
+            cout << "Please only enter one letter! \n";
+            cout << "Guess a letter or press 2 to guess the word! ";
+            getline(cin, letterToGuess);
+        }
         if(letterToGuess == "2"){
             cout << "What do you think the word is? ";
             getline(cin, wordGuess);
@@ -70,24 +82,39 @@ int main(){
                 loss--;
             }
         }
-        while(letterToGuess.length() > 1){
-            cout << "Please only enter one letter!";
-            getline(cin, letterToGuess);
-        }
         if(hangman->search(letterToGuess)){
-            letterArray[win] = letterToGuess;
+            for(int i = 0; i < (int) key.length(); i++){
+                if(letterArray[i] == letterToGuess){
+                    emptyGraph[i] = letterArray[i];
+                }
+            }
             win++;
             cout << "Letter " << letterToGuess << " found!\n";
-        }else if(hangman->search(letterToGuess) == false){
-            cout << "That's the wrong letter!\n";
-            wrongLetterArray[loss] = letterToGuess;
-            loss++;
+        }
+        if(letterToGuess.length() == 1){
+            if(hangman->search(letterToGuess) == false){
+                cout << "That's the wrong letter!\n";
+                hangman->printHangMan(loss);
+                wrongLetterArray[loss] = letterToGuess;
+                loss++;
+            }
+        }
+        for(int i = 0; i < (int) key.length(); i++){
+                if(emptyGraph[i] != letterArray[i]){
+                    winBool = false;
+                }
+            }
+        if(winBool){
+            cout << "You guessed correctly!\n";
+            break;
         }
         if(loss == 5){
-            cout << "You ran out of guesses!";
+            hangman->printHangMan(5);
+            cout << "You ran out of guesses!\n";
             break;
         }
     }
+    cout << "The word was " << key << endl;
     delete hangman;
     cout << "Thank you for playing!";
     return 0;
