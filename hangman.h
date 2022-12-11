@@ -1,11 +1,13 @@
 #include <iostream>
 #include <random>
+#include <fstream>
+#include <ctime>
 using namespace std;
-// 2 hangman arrays that prints when someone gets somethign wrong
 // array of alphabet
 const char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 #define SIZE 128
 struct Tester;
+const int WORD_SIZE = 2315;
 
 struct Hangman{
     Hangman();

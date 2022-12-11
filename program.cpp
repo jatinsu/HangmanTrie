@@ -1,8 +1,4 @@
 #include "hangman.h"
-#include <fstream>
-#include <ctime>
-
-const int WORD_SIZE = 2315;
 string loadWords(){
     string myArray[WORD_SIZE];
     string word;
@@ -30,7 +26,6 @@ string loadWords(){
 int main(){
     Hangman* hangman = new Hangman();
     string key, choice, letterToGuess, wordGuess;
-    bool winBool = true;
     int win = 0;
     unsigned int loss = 0;
     cout << "\nWelcome to Hangman!\n";
@@ -78,8 +73,7 @@ int main(){
                 cout << "You guessed correctly!\n";
                 break;
             }else{
-                cout << "That's not right! ";
-                loss--;
+                cout << "That's not right! \n";
             }
         }
         if(hangman->search(letterToGuess)){
@@ -91,20 +85,13 @@ int main(){
             win++;
             cout << "Letter " << letterToGuess << " found!\n";
         }
-        if(letterToGuess.length() == 1){
-            if(hangman->search(letterToGuess) == false){
-                cout << "That's the wrong letter!\n";
-                hangman->printHangMan(loss);
-                wrongLetterArray[loss] = letterToGuess;
-                loss++;
-            }
+        if(hangman->search(letterToGuess) == false){
+            cout << "That's the wrong letter!\n";
+            hangman->printHangMan(loss);
+            wrongLetterArray[loss] = letterToGuess;
+            loss++;
         }
-        for(int i = 0; i < (int) key.length(); i++){
-                if(emptyGraph[i] != letterArray[i]){
-                    winBool = false;
-                }
-            }
-        if(winBool){
+        if(win == (int) key.length()){
             cout << "You guessed correctly!\n";
             break;
         }
